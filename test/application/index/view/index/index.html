@@ -1,0 +1,15 @@
+{extend name="public/bbq_layout" /}
+{block name="content"}
+{php}
+$colorArr=['#ffffff','#6fdaf5','#fcbdd8'];
+{/php}
+{foreach name="lists.data" item="list" key="k" }
+<li class="li" style="background: {$colorArr[$k%3]};"><dt style="text-align:right;font-size:15px" value="247">{$list.id}楼</dt>
+	<dd style="text-align:left;font-size:20px"><img src="__image__/xin.png">TO:{$list.bbq_to}</dd>
+	<dd style="text-indent:2em;">{$list.bbq_content}</dd>
+	<dd style="text-align:right;font-size:20px">FROM:{$list.bbq_from}</dd>
+	<dd style="text-align:right;font-size:15px">DATE:{$list.time}</dd>
+</li>
+{/foreach}
+
+{/block}

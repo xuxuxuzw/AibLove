@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>AIB表白墙</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="images/xin.ico" rel="icon" href="__style__/xin.ico">
+    <link rel="stylesheet" href="__style__/style.css">
+    <link rel="stylesheet" href="__style__/index.css">
+    <script src="__script__/jquery-1.8.3.min.js"></script>
+    <script src="__script__/index.js"></script>
+</head>
+<body>
+<div class="body">
+    <a class="a" href="/" target="_self"><h2 id="biaoti">the love of wall</h2> </a>
+    <h3 align="right">{$user.member_list_username? "已登录：".$user.member_list_username.' <a href="/index/index/logout">退出</a>' : '未登录'}</h3>
+    <h3 align="right">
+    <a href="/index/oauth/login/type/wechat"><img width="26px" height="26px" src="__image__/wechat_login.png" alt=""></a>    
+    <a href="/index/oauth/login/type/qq"><img  width="26px" height="26px" src="__image__/qq_login.png" alt=""></a>    
+    <a href="/index/oauth/login/type/sina"><img  width="26px" height="26px" src="__image__/sina_login.png" alt=""></a>    
+    <a href="/index/oauth/login/type/baidu"><img  width="26px" height="26px" src="__image__/baidu_login.png" alt=""></a>    
+    <a href="/index/oauth/login/type/gdaib"><img  width="26px" height="26px" src="__image__/gdaib_login.png" alt=""></a>    
+       
+    </h3>
+    <div id="box">
+        <div id="LikeWindow" style="display: none;">
+            <form action="{:Url('save')}" id="myForm" onsubmit="return jiaoyan();"  method="post" >
+                TO:<input name="bbq_to" id="txt1" type="text" style="text-align:left;">
+                <br>
+                <textarea name="bbq_content" id="txt" rows="4" cols="60"></textarea>
+                <br>
+                <div>
+                    FROM:<input name="bbq_from" id="txt2" type="text" value="{$user.member_list_username? $user.member_list_username : '匿名'}">
+                    <input id="submit" class="submit"  type="submit" value="发布">
+                    <input id="reset" type="reset" value="重置">
+                </div>
+            </form>
+        </div>
+        <div id="button">
+            <form action="{:Url('search')}" method="post" >
+                <input class="search_txt" name="content" type="text" placeholder="id/to">
+                <input class="search" type="submit" value="我要搜索">
+            </form>
+            <input id="Like" type="button" value="我要表白">
+        </div>
+        <br>
+        <hr>
+        {block name="content"}
+
+        {/block}
+    </div>
+
+    <div class="change_box">
+        <form method="get" action="{:Url('index')}">
+            <div  style="float: left;margin-right:20px; ">
+            <input name="pagesize" type="hidden" value="{$lists.pagesize}" >
+            <input name="page" type="text" value="{$lists.page}" class="change_page">
+            <input type="submit" value="转到" class="zhuangdao">
+            </div>
+            {$page}
+            <ul style="float: left;" class="pagination">
+            <li style="border: 0px;margin-left:5px;"><span>共{$lists.allPage}页</span></li>
+            <li style="border: 0px;margin-left:5px;"><span>共{$lists.count}信息</span></li>
+            </ul>
+        </form>
+         
+        <br>
+
+        
+   </div>
+</div>
+</body>
+<script>
+    function jiaoyan(){
+        if($("#txt1").val()!="" && $("#txt").val()!="")
+        {
+            return true;
+        }
+        else
+        {
+            alert("内容不能为空");
+            return false;
+        }
+    }
+</script>
+</html>
